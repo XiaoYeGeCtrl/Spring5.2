@@ -409,8 +409,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	@Override
-	public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
-			throws BeansException {
+	public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)throws BeansException {
 
 		Object result = existingBean;
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
@@ -424,8 +423,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	@Override
-	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
-			throws BeansException {
+	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)throws BeansException {
 
 		Object result = existingBean;
 		for (BeanPostProcessor processor : getBeanPostProcessors()) {
@@ -1174,7 +1172,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (!Boolean.FALSE.equals(mbd.beforeInstantiationResolved)) {
 			// Make sure bean class is actually resolved at this point.
 			//mbd.isSynthetic()默认是false，
-			// 如果注册了InstantiationAwareBeanPostProcessors类型的BeanPostProcessor，
+			// 如果注册了InstantiationAwareBeanPostProcessors类型的BeanPostProcessor，如果有。则挨个去调用postProcessBeforeInstantiation方法
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
@@ -1952,7 +1950,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		if (mbd == null || !mbd.isSynthetic()) {
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
-
 		return wrappedBean;
 	}
 
