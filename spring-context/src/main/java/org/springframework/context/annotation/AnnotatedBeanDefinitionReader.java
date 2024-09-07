@@ -255,6 +255,7 @@ public class AnnotatedBeanDefinitionReader {
 		if (this.conditionEvaluator.shouldSkip(abd.getMetadata())) {
 			return;
 		}
+
 		//用来创建 bean 的 supplier，会替代掉 bean 本身的创建方法
 		//instanceSupplier 一般情况下为 null
 		abd.setInstanceSupplier(supplier);
@@ -280,12 +281,14 @@ public class AnnotatedBeanDefinitionReader {
 				}
 			}
 		}
+
 		//主要提供对BeanDefinition的一些定制化操作
 		if (customizers != null) {
 			for (BeanDefinitionCustomizer customizer : customizers) {
 				customizer.customize(abd);
 			}
 		}
+
 		//用 BeanDefinitionHolder 包装 BeanDefinition
 		BeanDefinitionHolder definitionHolder = new BeanDefinitionHolder(abd, beanName);
 		//此行代码与动态代理和 scope 注解有关，主要看看是否依照Spring的scope生成动态代理对象
@@ -309,3 +312,32 @@ public class AnnotatedBeanDefinitionReader {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
