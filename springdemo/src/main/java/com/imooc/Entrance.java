@@ -43,18 +43,18 @@ public class Entrance {
 //		User user5 = (User) applicationContext.getBean("user5");
 //		System.out.println("CustomizedBeanDefinitionRegistryPostProcessor创建的对象:" +user5);
 
-		/*
+
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Entrance.class);
 		HiService hiService = (HiService)applicationContext.getBean("hiServiceImpl");
 		hiService.sayHi();
 		System.out.println("---------------------------分割线以下执行HelloService-------------------------------");
 		HelloService helloService = (HelloService)applicationContext.getBean("helloServiceImpl");
-		helloService.sayHello();*/
+		helloService.sayHello();
 
 		// 测试Import元注解
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Entrance.class);
-		OutSide outSide = (OutSide)applicationContext.getBean("com.imooc.aspect.OutSide");
-		outSide.say();
+//		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Entrance.class);
+//		OutSide outSide = (OutSide)applicationContext.getBean("com.imooc.aspect.OutSide");
+//		outSide.say();
 
 		// 测试JDK动态代理
 //		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Entrance.class);

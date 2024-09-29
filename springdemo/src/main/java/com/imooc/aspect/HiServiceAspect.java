@@ -23,5 +23,4 @@ public class HiServiceAspect {
 	public void afterReturning(JoinPoint joinPoint, Object returnValue){
 		System.out.println("进行return拦截  " + joinPoint + "，返回值[" + returnValue + "]");
 	}
-
 }

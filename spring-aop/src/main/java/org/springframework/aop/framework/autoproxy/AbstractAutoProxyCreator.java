@@ -286,7 +286,6 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
             //返回代理的对象
             return proxy;
         }
-
         return null;
     }
 

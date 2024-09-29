@@ -80,11 +80,17 @@ public class BeanFactoryAspectJAdvisorsBuilder {
      * @see #isEligibleBean
      */
     public List<Advisor> buildAspectJAdvisors() {
+
+        // 尝试从缓存中查找列表，如果没有缓存，则证明是首次加载，执行if里面的逻辑
         List<String> aspectNames = this.aspectBeanNames;
 
         if (aspectNames == null) {
+
+            // 加上同步锁，以防止多线程下，多个线程同时去加载容器里的AspectJ切面类
             synchronized (this) {
                 aspectNames = this.aspectBeanNames;
+
+                // 使用双层检查锁机制，防止多线程下，多个线程同时去加载容器里的AspectJ切面类
                 if (aspectNames == null) {
                     List<Advisor> advisors = new ArrayList<>();
                     //用于保存切面的名称的集合
@@ -113,8 +119,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
                             aspectNames.add(beanName);
                             AspectMetadata amd = new AspectMetadata(beanType, beanName);
                             if (amd.getAjType().getPerClause().getKind() == PerClauseKind.SINGLETON) {
-                                MetadataAwareAspectInstanceFactory factory =
-                                        new BeanFactoryAspectInstanceFactory(this.beanFactory, beanName);
+                                MetadataAwareAspectInstanceFactory factory = new BeanFactoryAspectInstanceFactory(this.beanFactory, beanName);
                                 //Aspect里面的advice和pointcut被拆分成一个个的advisor，
                                 // advisor里的advice和pointcut是1对1的关系
                                 List<Advisor> classAdvisors = this.advisorFactory.getAdvisors(factory);
@@ -132,8 +137,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
                                     throw new IllegalArgumentException("Bean with name '" + beanName +
                                             "' is a singleton, but aspect instantiation model is not singleton");
                                 }
-                                MetadataAwareAspectInstanceFactory factory =
-                                        new PrototypeAspectInstanceFactory(this.beanFactory, beanName);
+                                MetadataAwareAspectInstanceFactory factory = new PrototypeAspectInstanceFactory(this.beanFactory, beanName);
                                 this.aspectFactoryCache.put(beanName, factory);
                                 advisors.addAll(this.advisorFactory.getAdvisors(factory));
                             }

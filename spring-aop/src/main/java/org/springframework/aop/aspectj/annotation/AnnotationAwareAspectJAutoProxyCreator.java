@@ -81,8 +81,7 @@ public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorA
         if (this.aspectJAdvisorFactory == null) {
             this.aspectJAdvisorFactory = new ReflectiveAspectJAdvisorFactory(beanFactory);
         }
-        this.aspectJAdvisorsBuilder =
-                new BeanFactoryAspectJAdvisorsBuilderAdapter(beanFactory, this.aspectJAdvisorFactory);
+        this.aspectJAdvisorsBuilder = new BeanFactoryAspectJAdvisorsBuilderAdapter(beanFactory, this.aspectJAdvisorFactory);
     }
 
 
